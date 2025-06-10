@@ -22,6 +22,7 @@ resource "aws_ecs_service" "service" {
 
   name    = var.service_name
   cluster = var.cluster_arn
+  availability_zone_rebalancing = "ENABLED"
   deployment_circuit_breaker {
     enable   = true
     rollback = true

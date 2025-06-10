@@ -3,13 +3,13 @@
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 4.49 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 5.77.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 4.49 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 5.77.0 |
 
 ## Modules
 
@@ -41,12 +41,12 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_autoscaling_configuration"></a> [autoscaling\_configuration](#input\_autoscaling\_configuration) | Autoscaling configuration for ECS service | <pre>object({<br>    max_connections_per_container = optional(number, 500)<br>    max_capacity                  = number<br>    min_capacity                  = number<br>  })</pre> | n/a | yes |
+| <a name="input_autoscaling_configuration"></a> [autoscaling\_configuration](#input\_autoscaling\_configuration) | Autoscaling configuration for ECS service | <pre>object({<br/>    max_connections_per_container = optional(number, 500)<br/>    max_capacity                  = number<br/>    min_capacity                  = number<br/>  })</pre> | n/a | yes |
 | <a name="input_cluster_arn"></a> [cluster\_arn](#input\_cluster\_arn) | The ECS cluster ARN | `string` | n/a | yes |
-| <a name="input_container_definitions"></a> [container\_definitions](#input\_container\_definitions) | Container definitions for the ECS service | <pre>list(object({<br>    name   = string<br>    image  = string<br>    cpu    = optional(number)<br>    memory = optional(number)<br>    portMappings = optional(list(object({<br>      hostPort      = optional(number)<br>      containerPort = number<br>      protocol      = string<br>    })))<br>    essential  = optional(bool)<br>    entryPoint = optional(list(string))<br>    command    = optional(list(string))<br>    firelensConfiguration = optional(object({<br>      type = string<br>      options = object({<br>        config-file-type        = string<br>        enable-ecs-log-metadata = string<br>        config-file-value       = string<br>      })<br>    }))<br>    logConfiguration = optional(object({<br>      logDriver = string<br>      options   = optional(map(string))<br>    }))<br>    environment = optional(list(object({<br>      name  = string<br>      value = string<br>    })))<br>    secrets = optional(list(object({<br>      name      = string<br>      valueFrom = string<br>    })))<br>  }))</pre> | n/a | yes |
+| <a name="input_container_definitions"></a> [container\_definitions](#input\_container\_definitions) | Container definitions for the ECS service | <pre>list(object({<br/>    name   = string<br/>    image  = string<br/>    cpu    = optional(number)<br/>    memory = optional(number)<br/>    portMappings = optional(list(object({<br/>      hostPort      = optional(number)<br/>      containerPort = number<br/>      protocol      = string<br/>    })))<br/>    essential  = optional(bool)<br/>    entryPoint = optional(list(string))<br/>    command    = optional(list(string))<br/>    firelensConfiguration = optional(object({<br/>      type = string<br/>      options = object({<br/>        config-file-type        = string<br/>        enable-ecs-log-metadata = string<br/>        config-file-value       = string<br/>      })<br/>    }))<br/>    logConfiguration = optional(object({<br/>      logDriver = string<br/>      options   = optional(map(string))<br/>    }))<br/>    environment = optional(list(object({<br/>      name  = string<br/>      value = string<br/>    })))<br/>    secrets = optional(list(object({<br/>      name      = string<br/>      valueFrom = string<br/>    })))<br/>  }))</pre> | n/a | yes |
 | <a name="input_cpu"></a> [cpu](#input\_cpu) | The CPU units | `number` | `1024` | no |
 | <a name="input_ecr_repository_arns"></a> [ecr\_repository\_arns](#input\_ecr\_repository\_arns) | The ECR repository ARNs | `list(string)` | `[]` | no |
-| <a name="input_execution_role_policies"></a> [execution\_role\_policies](#input\_execution\_role\_policies) | AWS IAM policies that ECS might need | <pre>list(object({<br>    name = string<br>    statement = list(object({<br>      Action   = list(string)<br>      Effect   = string<br>      Resource = list(string)<br>    }))<br>  }))</pre> | `[]` | no |
+| <a name="input_execution_role_policies"></a> [execution\_role\_policies](#input\_execution\_role\_policies) | AWS IAM policies that ECS might need | <pre>list(object({<br/>    name = string<br/>    statement = list(object({<br/>      Action   = list(string)<br/>      Effect   = string<br/>      Resource = list(string)<br/>    }))<br/>  }))</pre> | `[]` | no |
 | <a name="input_extra_target_groups"></a> [extra\_target\_groups](#input\_extra\_target\_groups) | Extra target groups, if needed | `list(string)` | `[]` | no |
 | <a name="input_health_check_grace_period_in_seconds"></a> [health\_check\_grace\_period\_in\_seconds](#input\_health\_check\_grace\_period\_in\_seconds) | Grace period to start to control health check on task definition | `number` | n/a | yes |
 | <a name="input_load_balancer_arn"></a> [load\_balancer\_arn](#input\_load\_balancer\_arn) | Load balancer ARN | `string` | n/a | yes |
@@ -54,9 +54,9 @@ No modules.
 | <a name="input_service_name"></a> [service\_name](#input\_service\_name) | The ECS service name | `string` | n/a | yes |
 | <a name="input_subnets"></a> [subnets](#input\_subnets) | List of subnets used by the ECS service | `list(string)` | n/a | yes |
 | <a name="input_target_group_arn"></a> [target\_group\_arn](#input\_target\_group\_arn) | Target group ARN | `string` | n/a | yes |
-| <a name="input_task_definition"></a> [task\_definition](#input\_task\_definition) | Task definition configuration block | <pre>object({<br>    entrypoint_container_name = string<br>    entrypoint_container_port = number<br>  })</pre> | n/a | yes |
-| <a name="input_task_role_extra_allowed_principals"></a> [task\_role\_extra\_allowed\_principals](#input\_task\_role\_extra\_allowed\_principals) | Extra allowed principals for ECS task role | <pre>object({<br>    aws      = optional(list(string))<br>    services = optional(list(string))<br>  })</pre> | <pre>{<br>  "aws": [],<br>  "services": []<br>}</pre> | no |
-| <a name="input_task_role_policies"></a> [task\_role\_policies](#input\_task\_role\_policies) | AWS IAM policies that the application might need | <pre>list(object({<br>    name = string<br>    statement = list(object({<br>      Action   = list(string)<br>      Effect   = string<br>      Resource = list(string)<br>    }))<br>  }))</pre> | `[]` | no |
+| <a name="input_task_definition"></a> [task\_definition](#input\_task\_definition) | Task definition configuration block | <pre>object({<br/>    entrypoint_container_name = string<br/>    entrypoint_container_port = number<br/>  })</pre> | n/a | yes |
+| <a name="input_task_role_extra_allowed_principals"></a> [task\_role\_extra\_allowed\_principals](#input\_task\_role\_extra\_allowed\_principals) | Extra allowed principals for ECS task role | <pre>object({<br/>    aws      = optional(list(string))<br/>    services = optional(list(string))<br/>  })</pre> | <pre>{<br/>  "aws": [],<br/>  "services": []<br/>}</pre> | no |
+| <a name="input_task_role_policies"></a> [task\_role\_policies](#input\_task\_role\_policies) | AWS IAM policies that the application might need | <pre>list(object({<br/>    name = string<br/>    statement = list(object({<br/>      Action   = list(string)<br/>      Effect   = string<br/>      Resource = list(string)<br/>    }))<br/>  }))</pre> | `[]` | no |
 | <a name="input_vpc_id"></a> [vpc\_id](#input\_vpc\_id) | The VPC ID | `string` | n/a | yes |
 
 ## Outputs
